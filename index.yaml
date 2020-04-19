@@ -3,7 +3,7 @@ entries:
   wordpress:
   - apiVersion: v1
     appVersion: 5.3.2
-    created: "2020-04-19T15:23:27.606497-07:00"
+    created: "2020-04-19T15:44:28.585116-07:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -30,4 +30,4 @@ entries:
     urls:
     - wordpress-9.0.3.tgz
     version: 9.0.3
-generated: "2020-04-19T15:23:27.597415-07:00"
+generated: "2020-04-19T15:44:28.580567-07:00"
