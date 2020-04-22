@@ -3,16 +3,7 @@ env:
   global:
   - SHA=$(git rev-parse HEAD)
 before_install:
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - sudo mv kubectl /usr/local/bin
-  - 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
-  - 'unzip awscli-bundle.zip'
-  - './awscli-bundle/install -b ~/bin/aws'
-  - 'export PATH=~/bin:$PATH'
-  - aws configure set default.aws_access_key_id AKIAQ66KETYT4X2RZB75
-  - aws configure set default.aws_secret_access_key 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
-  - aws eks --region us-east-2 update-kubeconfig --name Dev
+  - echo 'hello'
 
 script:
-  - kubectl get pods
+  - echo 'hello'
