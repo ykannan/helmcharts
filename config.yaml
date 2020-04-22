@@ -1,0 +1,16 @@
+orbs:
+  aws-eks: circleci/aws-eks@0.2.3
+version: 2.1
+workflows:
+  deployment:
+    jobs:
+      - aws-eks/install-helm-on-cluster:
+          cluster-name: Dev
+          enable-cluster-wide-admin-access: true
+          
+      - aws-eks/install-helm-chart:
+          chart: stable/wordpress
+          cluster-name: Dev
+          release-name: wordpress-release
+          requires:
+            - aws-eks/install-helm-on-cluster
