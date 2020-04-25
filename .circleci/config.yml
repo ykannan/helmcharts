@@ -5,7 +5,7 @@ version: 2.1
 workflows:
   deployment:  
     jobs:
-      - install-helm-on-clinet:
+      - install-helm-on-client:
           version: v3.1.2
 
       - aws-eks/install-helm-chart:
