@@ -3,11 +3,12 @@ orbs:
   helm: circleci/helm@0.1.1
 version: 2.1
 workflows:
-  deployment:
-    jobs:          
-      - install-helm-client:
-          version: v3.1.2
-
+  install-helm-on-clinet:
+    parameters:
+      version: v3.1.2
+         
+  deployment:  
+    jobs:         
       - aws-eks/install-helm-chart:
           chart: stable/hello-world-ui
           cluster-name: Dev
