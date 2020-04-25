@@ -4,10 +4,6 @@ version: 2.1
 workflows:
   deployment:  
     jobs:
-      - aws-eks/install-helm-on-cluster:
-          cluster-name: Dev
-          enable-cluster-wide-admin-access: true
-
       - aws-eks/install-helm-chart:
           chart: stable/hello-world-ui
           cluster-name: Dev
