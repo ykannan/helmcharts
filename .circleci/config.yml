@@ -9,4 +9,3 @@ workflows:
           cluster-name: Dev
           release-name: wordpress-release
           aws-region: '${AWS_REGION}'
-          aws-profile: arn:aws:iam::066459049511:instance-profile/Dev-EKSClusterIAM-QXN7S9W1J1P6-EksInstanceProfile-1AAROOYCOLBLM
