@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.meta_name }}
+  namespace: {{ .Values.namespace.name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.deployment.component }}
+    spec:
+      serviceAccountName: {{ .Values.rbac.service_account_name }}
+      containers:  
+        - name:  {{ .Values.deployment.container_name }}
+          image: {{ .Values.deployment.container_image }}
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+          ports:
+          - containerPort: {{ .Values.deployment.container_port }}
+          volumeMounts:
+            - name: {{ .Values.deployment.container_volume_mounts.name_1 }}
+              mountPath: /etc/prometheus/
+            - name: {{ .Values.deployment.container_volume_mounts.name_2 }}
+              mountPath: /prometheus/
+      volumes:
+        - name: {{ .Values.deployment.volumes.vol_name_1 }}
+          configMap: 
+            defaultMode: {{ .Values.deployment.volumes.config_map.default_mode }}
+            name: {{ .Values.deployment.volumes.config_map.name_1 }}
+        - name: {{ .Values.deployment.volumes.vol_name_2 }}
+          emptyDir: {}

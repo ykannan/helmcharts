@@ -1,0 +1,9 @@
+apiVersion: v2
+name: grafana
+description: A Helm chart for grafana in kubernetes
+
+type: application
+
+# This is the chart version.
+version: 1.0.0
+namespace: monitoring

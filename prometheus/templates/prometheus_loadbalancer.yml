@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: {{ .Values.loadbalancer.meta_name }}
+  namespace: {{ .Values.namespace.name }}
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port:   '9090'
+spec:
+  type: LoadBalancer
+  ports:
+    - name: {{ .Values.loadbalancer.ports.name_1 }}
+      port: {{ .Values.loadbalancer.ports.port_1 }}
+      targetPort: {{ .Values.loadbalancer.ports.targetport_1 }}
+    - name: {{ .Values.loadbalancer.ports.name_2 }}
+      port: {{ .Values.loadbalancer.ports.port_2 }}
+      targetPort: {{ .Values.loadbalancer.ports.targetport_2 }}
+  selector: 
+    component: {{ .Values.deployment.component }}
+
+

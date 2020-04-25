@@ -1,0 +1,49 @@
+# Default values for kube-state-metrics.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+namespace:
+  name: default
+
+deployment:
+  meta_name: prometheus-deployment
+  replicas: 1
+  component: prometheus-server
+  container_name: prometheus
+  container_image:  prom/prometheus:latest
+  container_port: 9090
+  container_volume_mounts:
+    name_1: prometheus-config-volume
+    name_2: prometheus-storage-volume
+  volumes:
+    vol_name_1: prometheus-config-volume
+    config_map: 
+      default_mode: 420
+      name_1: prometheus-server-config
+    vol_name_2: prometheus-storage-volume
+
+loadbalancer:
+  meta_name: prometheus-load-balancer
+  ports:
+    name_1: prometheus-ui
+    port_1: 9090
+    targetport_1: 9090
+    name_2: node-export
+    port_2: 9100
+    targetport_2: 9100
+
+rbac:
+  service_account_name: prometheus-monitoring
+  cluster_role_name: prometheus
+  cluster_rolebinding_name: prometheus
+
+node_exporter:
+  meta_name: node-exporter
+  container_name: node-exporter
+  container_image: quay.io/prometheus/node-exporter:latest
+  container_host_port: 9100
+  container_container_port: 9100
+
+config_map:
+  meta_name: prometheus-server-config

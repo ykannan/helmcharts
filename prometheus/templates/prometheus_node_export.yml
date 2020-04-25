@@ -1,0 +1,45 @@
+kind: DaemonSet
+apiVersion: extensions/v1beta1
+metadata: 
+  name: {{ .Values.node_exporter.meta_name }}
+  namespace: {{ .Values.namespace.name }}
+spec: 
+  selector: 
+    matchLabels: 
+      daemon: node-exporter
+      grafanak8sapp: "true"
+  template: 
+    metadata: 
+      name: node-exporter
+      labels: 
+        daemon: node-exporter
+        grafanak8sapp: "true"
+    spec: 
+      volumes: 
+      - name: proc
+        hostPath: 
+          path: /proc
+      - name: sys
+        hostPath: 
+          path: /sys
+      containers: 
+      - name: {{ .Values.node_exporter.container_name }}
+        image: {{ .Values.node_exporter.container_image }}
+        args: 
+          - --path.procfs=/proc_host
+          - --path.sysfs=/host_sys
+        ports: 
+          - name: node-exporter
+            hostPort: {{ .Values.node_exporter.container_host_port }}
+            containerPort: {{ .Values.node_exporter.container_container_port }}
+        volumeMounts: 
+          - name: sys
+            readOnly: true
+            mountPath: /host_sys
+          - name: proc
+            readOnly: true
+            mountPath: /proc_host
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      hostNetwork: true
+      hostPID: true

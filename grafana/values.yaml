@@ -1,0 +1,27 @@
+# Default values for grafana.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+namespace:
+  name: default
+
+deployment:
+  meta_name: grafana-deployment
+  replicas: 1
+  component: grafana-server
+  container_name: grafana
+  container_image:  grafana/grafana
+  container_port: 3000
+  mount_name_1: grafana-volume
+  mount_path_1: /var/lib/grafana
+  container_env:
+    name_1: GF_SERVER_HTTP_PORT
+    name_2: GF_INSTALL_PLUGINS
+  volume_name: grafana-volume
+
+loadbalancer:
+  meta_name: grafana-load-balancer
+  ports:
+    port: 3000
+    targetport: 3000

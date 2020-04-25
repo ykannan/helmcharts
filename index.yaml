@@ -1,9 +1,39 @@
 apiVersion: v1
 entries:
+  grafana:
+  - apiVersion: v2
+    created: "2020-04-24T17:50:35.117632-07:00"
+    description: A Helm chart for grafana in kubernetes
+    digest: da79004934b25a1b1a9acdd5d69823bdf1f2e20a2e4cf6566fda6d33f43651fe
+    name: grafana
+    type: application
+    urls:
+    - grafana-1.0.0.tgz
+    version: 1.0.0
+  kube-state-metrics:
+  - apiVersion: v2
+    created: "2020-04-24T17:50:35.11892-07:00"
+    description: A Helm chart for deploying kubernetes state metrics
+    digest: 538aebb2c0eb5875a17340f3475e2d5f99b5da79d86e043c8c11b14d8b0c6b8f
+    name: kube-state-metrics
+    type: application
+    urls:
+    - kube-state-metrics-1.0.0.tgz
+    version: 1.0.0
+  prometheus:
+  - apiVersion: v2
+    created: "2020-04-24T17:50:35.122215-07:00"
+    description: A Helm chart for deploying prometheus
+    digest: 41a9f9b6ff1fa2e61d5628a8965e2b45156a7394f3ffb6b6c1b14efa2c0564ad
+    name: prometheus
+    type: application
+    urls:
+    - prometheus-1.0.0.tgz
+    version: 1.0.0
   wordpress:
   - apiVersion: v1
     appVersion: 5.3.2
-    created: "2020-04-19T15:44:28.585116-07:00"
+    created: "2020-04-24T17:50:35.131992-07:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -30,4 +60,4 @@ entries:
     urls:
     - wordpress-9.0.3.tgz
     version: 9.0.3
-generated: "2020-04-19T15:44:28.580567-07:00"
+generated: "2020-04-24T17:50:35.116105-07:00"

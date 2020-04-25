@@ -1,0 +1,30 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata: 
+  name: {{ .Values.deployment.meta_name }}
+  namespace: {{ .Values.namespace.name }}
+spec: 
+  selector: 
+    matchLabels: 
+      component: {{ .Values.deployment.component }} 
+      grafanak8sapp: "true" 
+  replicas: {{ .Values.deployment.replicas }}
+  template: 
+    metadata: 
+      labels: 
+        component: {{ .Values.deployment.component }} 
+        grafanak8sapp: "true"
+    spec: 
+      serviceAccountName: {{ .Values.deployment.service_account_name }} 
+      containers: 
+      - name: {{ .Values.deployment.container_name }}
+        image: {{ .Values.deployment.container_image }}
+        ports: 
+        - name: http-metrics
+          containerPort: {{ .Values.deployment.container_port }}
+        readinessProbe: 
+          httpGet: 
+            path: {{ .Values.deployment.readinessprobe.path }}
+            port: {{ .Values.deployment.readinessprobe.port }}
+          initialDelaySeconds: {{ .Values.deployment.readinessprobe.initial_delay_seconds }}
+          timeoutSeconds: {{ .Values.deployment.readinessprobe.timeout_seconds }}

@@ -1,0 +1,34 @@
+# Default values for kube-state-metrics.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+namespace:
+  name: default
+
+deployment:
+  meta_name: kube-state-metrics
+  replicas: 1
+  component: kube-state-metrics
+  service_account_name: kube-state-metrics
+  container_name: kube-state-metrics
+  container_image:  quay.io/coreos/kube-state-metrics:v1.1.0
+  container_port: 8080
+  readinessprobe:
+    path: /healthz
+    port: 8080
+    initial_delay_seconds: 5
+    timeout_seconds: 5
+
+loadbalancer:
+  meta_name: kube-state-metrics-load-balancer
+  ports:
+    port: 8080
+    targetport: 8080
+
+rbac:
+  service_account_name: kube-state-metrics
+  role_name: kube-state-metrics
+  rolebinding_name: kube-state-metrics
+  cluster_role_name: kube-state-metrics
+  cluster_rolebinding_name: kube-state-metrics

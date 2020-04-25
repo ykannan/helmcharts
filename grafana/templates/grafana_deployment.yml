@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.meta_name }}
+  namespace: {{ .Values.namespace.name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        component: {{ .Values.deployment.component }}
+    spec:
+      containers:
+        - name: {{ .Values.deployment.container_name }}
+          image:  {{ .Values.deployment.container_image }}
+          ports:
+            - containerPort: {{ .Values.deployment.container_port }}
+          volumeMounts:
+            - name: {{ .Values.deployment.mount_name_1 }}
+              mountPath: {{ .Values.deployment.mount_path_1 }}
+          env:
+            - name: {{ .Values.deployment.container_env.name_1}}
+              value: "3000"
+            - name: {{ .Values.deployment.container_env.name_2}}
+              value: "grafana-kubernetes-app"
+      volumes:
+        - name: {{ .Values.deployment.volume_name }}
+          emptyDir: {}
