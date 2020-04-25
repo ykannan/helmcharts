@@ -5,7 +5,7 @@ version: 2.1
 workflows:
   deployment:
     jobs:          
-      - helm/install-helm-client:
+      - install-helm-client:
           version: v3.1.2
 
       - aws-eks/install-helm-chart:
