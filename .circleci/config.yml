@@ -1,9 +1,10 @@
 orbs:
-  aws-eks: circleci/aws-eks@3.0.0
-version: 2.1
+  aws-eks: circleci/aws-eks@0.2.3
+version: 3.0
 workflows:
   deployment:  
     jobs:
+
       - aws-eks/install-helm-chart:
           chart: stable/hello-world-ui
           cluster-name: Dev
