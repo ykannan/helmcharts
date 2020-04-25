@@ -3,14 +3,10 @@ orbs:
 version: 2.1
 workflows:
   deployment:
-    jobs:
-      - aws-eks/install-helm-on-cluster:
-          cluster-name: Dev
-          enable-cluster-wide-admin-access: true
-          
+    jobs:          
       - aws-eks/install-helm-chart:
-          chart: stable/wordpress
+          chart: stable/hello-world-ui
           cluster-name: Dev
           release-name: wordpress-release
-          requires:
-            - aws-eks/install-helm-on-cluster
+          aws-region: '${AWS_REGION}'
+          aws-profile: Dev-EKSClusterIAM-QXN7S9W1J1P6-EKSClusterRole-Z8CNYCGHLNLL
