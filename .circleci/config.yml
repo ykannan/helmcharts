@@ -5,7 +5,7 @@ version: 2.1
 workflows:
   deployment:  
     jobs:      
-      - aws-eks/install-helm-on-clinet:
+      - helm/install-helm-on-clinet:
           executor: aws-eks/python
           parameters:
             version: v3.1.2
